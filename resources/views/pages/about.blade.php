@@ -1,16 +1,23 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title></title>
-	</head>
-	<body>
+@extends ('layouts.app')
 		
-		
-		
-		<h1>About ME! {{$first}} {{$last}} </h1>
+@section ('content')
 	
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sequi quo odio recusandae minus harum quia minima illo aperiam iure praesentium, eos delectus laudantium laboriosam nihil, deserunt vitae. Repellendus, ullam.
-		
+	<h1>About Me!</h1>
+	
+	@if (count($people))
+	<h2>People I like</h2>
+	
+	<ul>
+	@foreach ($people as $person)
+		<li>{{ $person }}</li>
+	@endforeach	
+	</ul>
+	@endif
+	
+
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sequi quo odio recusandae minus harum quia minima illo aperiam iure praesentium, eos delectus laudantium laboriosam nihil, deserunt vitae. Repellendus, ullam.	
 	</p>
-	</body>
-</html>
+
+@endsection
+
+
