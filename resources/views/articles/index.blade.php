@@ -8,7 +8,8 @@
 
 	<article>
 		<h2>
-		 <a href="#"> {{ $article->title }} </a>
+		 <a href="/articles/{{$article->id }}"> {{ $article->title }} </a>
+
 		 </h2>
 
 		<div class="body">
