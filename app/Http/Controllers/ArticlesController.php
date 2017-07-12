@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
-
 use App\Article;
-use Carbon\Carbon;
+use App\Http\Requests;
+use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
+use Illuminate\HttpResponse;
+use Carbon\Carbon;
+
 
 
 
@@ -52,7 +54,7 @@ class ArticlesController extends Controller
         return view('articles.edit', compact('article'));
     }
 
-    public function update($id, Request $request)
+    public function update($id, ArticleRequest $request)
     {
         $article = Article::findOrFail($id);
 
