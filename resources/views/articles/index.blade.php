@@ -8,6 +8,7 @@
 
 	<article>
 		<h2>
+		
 		 <a href="/articles/{{$article->id }}"> {{ $article->title }} </a>
 
 		 </h2>
@@ -17,7 +18,7 @@
 			{{ $article->body }}
 
 		</div>
-
+	
 	</article>
 
 	@endforeach
