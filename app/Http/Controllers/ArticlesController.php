@@ -7,7 +7,6 @@ use App\Http\Requests;
 use App\Article;
 use Carbon\Carbon;
 
-use Request;
 
 
 class ArticlesController extends Controller
@@ -36,13 +35,11 @@ class ArticlesController extends Controller
         return view ('articles.create');
     }
 
-    public function store()
+    public function store(Requests\CreateArticleRequest $request)
     {
-            Article::create(Request::all());
-            //$input['published_at'] = Carbon::now();
-
-            Article::create($input);
-
+            Article::create($request->all());
+            
+            
             return redirect('articles');
     }
 }
