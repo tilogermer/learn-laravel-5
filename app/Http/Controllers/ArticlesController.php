@@ -39,13 +39,15 @@ class ArticlesController extends Controller
         return view ('articles.create');
     }
 
-    public function store(Requests\CreateArticleRequest $request)
+
+    public function store(ArticleRequest $request)
     {
             Article::create($request->all());
             
             
             return redirect('articles');
     }
+
 
     public function edit($id)
     {
