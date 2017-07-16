@@ -37,7 +37,7 @@ class ArticlesController extends Controller
 
     public function create()
     {
-        $tags = \App\Tag::pluck('name', 'name');
+        $tags = \App\Tag::pluck('name', 'id');
 
         return view ('articles.create', compact('tags'));
     }
@@ -45,12 +45,16 @@ class ArticlesController extends Controller
 
     public function store(ArticleRequest $request)
     {       
-            $article = new Article($request->all());
+            //dd($request->input('tags'));
 
-            $tags = $request->input('tags');
+            $article = Auth::user()->articles()->create($request->all());
 
+            $tagIDs = $request->input('tags');
 
-            Auth::user()->articles()->save($article);
+            //$article = new Article($request->all());
+
+            $article->tags()->attach($request->input('tags'));
+            
 
             //Article::create($request->all());
             
@@ -61,9 +65,11 @@ class ArticlesController extends Controller
 
     public function edit($id)
     {
+        $tags = \App\Tag::pluck('name', 'id');
+
         $article = Article::findOrFail($id);
         
-        return view('articles.edit', compact('article'));
+        return view('articles.edit', compact('article', 'tags'));
     }
 
     public function update($id, ArticleRequest $request)
