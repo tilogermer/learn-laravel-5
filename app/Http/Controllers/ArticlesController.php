@@ -37,13 +37,18 @@ class ArticlesController extends Controller
 
     public function create()
     {
-        return view ('articles.create');
+        $tags = \App\Tag::pluck('name', 'name');
+
+        return view ('articles.create', compact('tags'));
     }
 
 
     public function store(ArticleRequest $request)
     {       
             $article = new Article($request->all());
+
+            $tags = $request->input('tags');
+
 
             Auth::user()->articles()->save($article);
 
