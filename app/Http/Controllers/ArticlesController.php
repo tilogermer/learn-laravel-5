@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Article;
+use App\Tag;
 use App\Http\Requests;
 use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
@@ -25,10 +26,8 @@ class ArticlesController extends Controller
 
     }
 
-    public function show($id)
+    public function show(Article $article)
     {
-    	
-    	$article = Article::findOrFail($id);
     	
 
     	return view ('articles.show', compact('article'));
@@ -37,7 +36,7 @@ class ArticlesController extends Controller
 
     public function create()
     {
-        $tags = \App\Tag::pluck('name', 'id');
+        $tags = Tag::pluck('name', 'id');
 
         return view ('articles.create', compact('tags'));
     }
@@ -49,11 +48,15 @@ class ArticlesController extends Controller
 
             $article = Auth::user()->articles()->create($request->all());
 
-            $tagIDs = $request->input('tags');
+            //$tagIDs = $request->input('tag_list');
+
+            $article->tags()->attach($request->input('tag_list'));
+
+            
 
             //$article = new Article($request->all());
 
-            $article->tags()->attach($request->input('tags'));
+            
             
 
             //Article::create($request->all());
@@ -63,20 +66,22 @@ class ArticlesController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit(Article $article)
     {
         $tags = \App\Tag::pluck('name', 'id');
 
-        $article = Article::findOrFail($id);
+        //$article = Article::findOrFail($id);
         
         return view('articles.edit', compact('article', 'tags'));
     }
 
-    public function update($id, ArticleRequest $request)
+    public function update(ArticleRequest $request, Article $article)
     {
-        $article = Article::findOrFail($id);
+        //$article = Article::findOrFail($id);
 
         $article->update($request->all());
+
+        $article->tags()->sync($request->input('tag_list'));
 
         return redirect('articles');
     }
