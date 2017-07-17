@@ -11,8 +11,14 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link href="{{ asset('css/app.css') }}"
+     rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+
+
+
+
 </head>
 <body>
 <div class="container-fluid">
@@ -75,8 +81,15 @@
 
         @yield('content')
     </div>
+        
 </div>
-    <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    
+    @yield('footer')
+    <!-- Scripts -->
+    
+    
 </body>
 </html>
