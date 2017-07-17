@@ -46,11 +46,11 @@ class ArticlesController extends Controller
     {       
             //dd($request->input('tags'));
 
-            $article = Auth::user()->articles()->create($request->all());
+            $this->createArticle($request);
 
-            //$tagIDs = $request->input('tag_list');
-
-            $article->tags()->attach($request->input('tag_list'));
+            
+            
+            //$article->tags()->attach($request->input('tag_list'));
 
             
 
@@ -60,6 +60,8 @@ class ArticlesController extends Controller
             
 
             //Article::create($request->all());
+
+            
             
             
             return redirect('articles');
@@ -81,9 +83,23 @@ class ArticlesController extends Controller
 
         $article->update($request->all());
 
-        $article->tags()->sync($request->input('tag_list'));
+        $this->syncTags($article, $request->input('tag_list'));
 
         return redirect('articles');
+    }
+
+    private function syncTags(Article $article, array $tags)
+    {
+        $article->tags()->sync($tags);
+    }
+
+    private function createArticle(ArticleRequest $request)
+    {
+        $article = Auth::user()->articles()->create($request->all());
+
+        $this->syncTags($article, $request->input('tag_list'));
+
+        return $article;
     }
 }
 
