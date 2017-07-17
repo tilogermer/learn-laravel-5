@@ -20,8 +20,8 @@ class ArticlesController extends Controller
     public function index()
     {
     	$articles = Article::latest('published_at')->published()->get();
-
-                
+        
+                       
     	return view ('articles.index', compact('articles'));
 
     }
