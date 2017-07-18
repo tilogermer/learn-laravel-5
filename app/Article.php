@@ -33,6 +33,11 @@ class Article extends Model
     	//createFromFormat('Y-m-d', $date);
     }
 
+    public function getPublishedAtAttribute($date)
+    {
+        return Carbon::parse($date)->format('Y-m-d');
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User');
