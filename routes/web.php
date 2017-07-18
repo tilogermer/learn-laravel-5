@@ -24,6 +24,7 @@ Route::get('/contact', 'PagesController@contact');
 //Route::get('/articles/{id}/edit', 'ArticlesController@edit');
 
 Route::resource('articles', 'ArticlesController');
+Route::get('/tags/{tags}', 'TagsController@show');
 
 
 
